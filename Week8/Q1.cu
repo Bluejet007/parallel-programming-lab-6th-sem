@@ -73,9 +73,9 @@ int main() {
     printf("Ele-wise:\n");
     printMatf((float *) matRes, M, N);
 
-    cudaFree(matA);
-    cudaFree(matB);
-    cudaFree(matRes);
+    cudaFree(dA);
+    cudaFree(dB);
+    cudaFree(dRes);
     printf("Rachit 54\n");
     return 0;
 }

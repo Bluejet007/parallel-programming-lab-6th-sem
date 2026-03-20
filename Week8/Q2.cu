@@ -5,7 +5,7 @@
 #define N 3
 #define P 4
 
-__global__ void mulRow(float *aMat, float *bMat, float *resMat, uint m, uint n, uint p) {
+__global__ void powRow(float *aMat, float *bMat, float *resMat, uint m, uint n, uint p) {
     uint i = blockDim.x * blockIdx.x + threadIdx.x;
 
     if(i < m)
@@ -79,7 +79,7 @@ int main() {
     cudaMemcpy(dA, matA, sA, cudaMemcpyHostToDevice);
     cudaMemcpy(dB, matB, sB, cudaMemcpyHostToDevice);
 
-    mulRow<<<1, M>>>(dA, dB, dRes, M, N, P);
+    powRow<<<1, M>>>(dA, dB, dRes, M, N, P);
     cudaMemcpy(matRes, dRes, sRes, cudaMemcpyDeviceToHost);
     printf("Row-wise:\n");
     printMatf((float *) matRes, M, N);
@@ -94,9 +94,9 @@ int main() {
     printf("Ele-wise:\n");
     printMatf((float *) matRes, M, N);
 
-    cudaFree(matA);
-    cudaFree(matB);
-    cudaFree(matRes);
+    cudaFree(dA);
+    cudaFree(dB);
+    cudaFree(dRes);
     printf("Rachit 54\n");
     return 0;
 }
